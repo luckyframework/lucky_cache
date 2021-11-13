@@ -1,0 +1,54 @@
+name: LuckyCache CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: "*"
+
+jobs:
+  check_format:
+    strategy:
+      fail-fast: false
+      matrix:
+        crystal_version:
+          - 1.0.0
+          - 1.1.0
+          - 1.2.0
+        experimental:
+          - false
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
+    container: crystallang/crystal:${{ matrix.crystal_version }}-alpine
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install shards
+        run: shards install
+      - name: Format
+        run: crystal tool format --check
+      - name: Lint
+        run: ./bin/ameba
+  specs:
+    strategy:
+      fail-fast: false
+      matrix:
+        crystal_version:
+          - 1.0.0
+          - 1.1.0
+          - 1.2.0
+        experimental:
+          - false
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
+    container: crystallang/crystal:${{ matrix.crystal_version }}-alpine
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Crystal
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/crystal
+          key: ${{ runner.os }}-crystal
+      - name: Install dependencies
+        run: shards install
+      - name: Run tests
+        run: crystal spec

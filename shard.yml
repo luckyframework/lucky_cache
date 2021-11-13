@@ -1,0 +1,24 @@
+name: lucky_cache
+version: 0.1.0
+
+authors:
+  - Jeremy Woertink <jeremywoertink@gmail.com>
+
+crystal: ">= 1.1.0"
+
+license: MIT
+
+dependencies:
+  splay_tree_map:
+    github: wyhaines/splay_tree_map.cr
+  habitat:
+    github: luckyframework/habitat
+    version: ~> 0.4.7
+
+development_dependencies:
+  timecop:
+    github: crystal-community/timecop.cr
+    branch: master
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 0.14.2
