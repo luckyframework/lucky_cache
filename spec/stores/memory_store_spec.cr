@@ -85,6 +85,24 @@ describe LuckyCache::MemoryStore do
       bul.should eq(false)
       tym.should eq(Time.local(1999, 10, 31, 18, 30))
     end
+
+    it "expires at the specified time" do
+      cache = LuckyCache::MemoryStore.new
+      Timecop.freeze(Time.local(2042, 3, 17, 21, 49)) do
+        cache.fetch("coupon", expires_in: 48.hours, as: UUID) do
+          UUID.random
+        end
+        Timecop.travel(12.hours.from_now) do
+          cache.read("coupon").not_nil!.expired?.should eq(false)
+        end
+        Timecop.travel(35.hours.from_now) do
+          cache.read("coupon").not_nil!.expired?.should eq(false)
+        end
+        Timecop.travel(49.hours.from_now) do
+          cache.read("coupon").should eq(nil)
+        end
+      end
+    end
   end
 
   describe "#read" do

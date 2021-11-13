@@ -16,7 +16,7 @@ module LuckyCache
     end
 
     # Adds the block value to the `cache`. Returns the block value
-    def write(key : CacheKey, expires_in : Time::Span = LuckyCache.settings.default_duration, &)
+    def write(key : CacheKey, *, expires_in : Time::Span = LuckyCache.settings.default_duration, &)
       data = yield
 
       if data.is_a?(Array)
@@ -42,24 +42,24 @@ module LuckyCache
     # If the `CacheItem` exists, it will map the `Array(Cachable)`
     # in to `Array(T)`. If no item is found, write the block value
     # and return the block value
-    def fetch(key : CacheKey, as : Array(T).class, &) forall T
+    def fetch(key : CacheKey, *, as : Array(T).class, expires_in : Time::Span = LuckyCache.settings.default_duration, &) forall T
       if cache_item = read(key)
         new_array = Array(T).new
         cache_item.value.as(Array(LuckyCache::Cachable)).each { |v| new_array << v.as(T) }
         new_array
       else
-        write(key) { yield }
+        write(key, expires_in: expires_in) { yield }
       end
     end
 
     # If the `CacheItem` exists, it will cast the `Cachable`
     # in to `T`. If no item is found, write the block value
     # and return the block value
-    def fetch(key : CacheKey, as : T.class, &) forall T
+    def fetch(key : CacheKey, *, as : T.class, expires_in : Time::Span = LuckyCache.settings.default_duration, &) forall T
       if cache_item = read(key)
         cache_item.value.as(T)
       else
-        write(key) { yield }
+        write(key, expires_in: expires_in) { yield }
       end
     end
   end
