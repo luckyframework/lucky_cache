@@ -17,7 +17,7 @@ class Post
 end
 
 describe LuckyCache::MemoryStore do
-  describe "fetch" do
+  describe "#fetch" do
     it "does both read and write" do
       cache = LuckyCache::MemoryStore.new
       counter = 0
@@ -84,6 +84,36 @@ describe LuckyCache::MemoryStore do
       int.should eq(0_i64)
       bul.should eq(false)
       tym.should eq(Time.local(1999, 10, 31, 18, 30))
+    end
+  end
+
+  describe "#read" do
+    it "returns nil when no key is found" do
+      cache = LuckyCache::MemoryStore.new
+      cache.read("key").should eq(nil)
+    end
+
+    it "returns nil when the item is expired" do
+      cache = LuckyCache::MemoryStore.new
+      cache.write("key", expires_in: 1.minute) { "some data" }
+      Timecop.travel(90.seconds.from_now) do
+        cache.read("key").should eq(nil)
+      end
+    end
+  end
+
+  describe "#delete" do
+    it "returns nil when no item exists" do
+      cache = LuckyCache::MemoryStore.new
+      cache.delete("key").should eq(nil)
+    end
+
+    it "deletes the value from cache" do
+      cache = LuckyCache::MemoryStore.new
+      cache.write("key") { 123 }
+      cache.read("key").should_not be_nil
+      cache.delete("key")
+      cache.read("key").should be_nil
     end
   end
 end

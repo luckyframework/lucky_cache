@@ -7,9 +7,12 @@ module LuckyCache
       @cache = SplayTreeMap(CacheKey, CacheItem).new
     end
 
-    # Returns the `CacheItem` or nil if the `key` is not found
+    # Returns the `CacheItem` or nil if the `key` is not found.
+    # If the key is found, but the item is expired, it returns nil.
     def read(key : CacheKey) : CacheItem?
-      cache[key]?
+      if item = cache[key]?
+        item.expired? ? nil : item
+      end
     end
 
     # Adds the block value to the `cache`. Returns the block value
@@ -29,6 +32,11 @@ module LuckyCache
       )
 
       data
+    end
+
+    # Deletes `key` from the cache
+    def delete(key : CacheKey)
+      cache.delete(key)
     end
 
     # If the `CacheItem` exists, it will map the `Array(Cachable)`
