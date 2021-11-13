@@ -54,7 +54,7 @@ describe LuckyCache::MemoryStore do
       friends.map(&.email).should contain("chris@email.net")
     end
 
-    it "can cache other types" do
+    it "can cache other complex types" do
       cache = LuckyCache::MemoryStore.new
       counter = 0
       cache.fetch("blogs", as: Array(Post)) do
@@ -71,6 +71,19 @@ describe LuckyCache::MemoryStore do
       friends = result.not_nil!
       friends.size.should eq(2)
       friends.map(&.title).should contain("learn about cash")
+    end
+
+    it "caches basic types" do
+      cache = LuckyCache::MemoryStore.new
+      str = cache.fetch("string:key", as: String) { "test" }
+      int = cache.fetch("int:key", as: Int64) { 0_i64 }
+      bul = cache.fetch("bool:key", as: Bool) { false }
+      tym = cache.fetch("time:key", as: Time) { Time.local(1999, 10, 31, 18, 30) }
+
+      str.should eq("test")
+      int.should eq(0_i64)
+      bul.should eq(false)
+      tym.should eq(Time.local(1999, 10, 31, 18, 30))
     end
   end
 end
