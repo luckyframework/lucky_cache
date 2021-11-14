@@ -134,4 +134,22 @@ describe LuckyCache::MemoryStore do
       cache.read("key").should be_nil
     end
   end
+
+  describe "#flush" do
+    it "resets all of the cache" do
+      cache = LuckyCache::MemoryStore.new
+      cache.write("numbers") { 123 }
+      cache.write("letters") { "abc" }
+      cache.write("false") { true }
+      cache.read("numbers").should_not be_nil
+      cache.read("letters").should_not be_nil
+      cache.read("false").should_not be_nil
+
+      cache.flush
+
+      cache.read("numbers").should be_nil
+      cache.read("letters").should be_nil
+      cache.read("false").should be_nil
+    end
+  end
 end

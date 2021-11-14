@@ -104,4 +104,11 @@ describe LuckyCache::NullStore do
       cache.delete("key").should eq(nil)
     end
   end
+
+  describe "#flush" do
+    it "does nothing" do
+      cache = LuckyCache::NullStore.new
+      cache.responds_to?(:flush).should eq(true)
+    end
+  end
 end

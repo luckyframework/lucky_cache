@@ -4,7 +4,7 @@ module LuckyCache
       nil
     end
 
-    def write(key : CacheKey, *, expires_in : Time::Span = 1.second, &)
+    def write(key : CacheKey, *, expires_in : Time::Span = LuckyCache.settings.default_duration, &)
       yield
     end
 
@@ -12,11 +12,15 @@ module LuckyCache
       nil
     end
 
-    def fetch(key : CacheKey, *, as : Array(T).class, expires_in : Time::Span = 1.second, &) forall T
+    def flush : Nil
+      nil
+    end
+
+    def fetch(key : CacheKey, *, as : Array(T).class, expires_in : Time::Span = LuckyCache.settings.default_duration, &) forall T
       yield
     end
 
-    def fetch(key : CacheKey, *, as : T.class, expires_in : Time::Span = 1.second, &) forall T
+    def fetch(key : CacheKey, *, as : T.class, expires_in : Time::Span = LuckyCache.settings.default_duration, &) forall T
       yield
     end
   end

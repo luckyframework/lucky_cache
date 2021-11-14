@@ -38,6 +38,11 @@ module LuckyCache
       cache.delete(key)
     end
 
+    # Completely clears all cache keys
+    def flush : Nil
+      cache.clear
+    end
+
     # If the `CacheItem` exists, it will map the `Array(Cachable)`
     # in to `Array(T)`. If no item is found, write the block value
     # and return the block value
