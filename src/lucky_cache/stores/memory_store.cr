@@ -1,6 +1,5 @@
 module LuckyCache
   struct MemoryStore < BaseStore
-    alias CacheKey = String
     private getter cache : SplayTreeMap(CacheKey, CacheItem)
 
     def initialize
