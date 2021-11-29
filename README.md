@@ -34,6 +34,26 @@ some_object = cache.fetch("some_key", as: SomeObject) do
 end
 ```
 
+### Page fragment cache
+
+You can cache portions of your page by including the `LuckyCache::HtmlHelpers` module
+in your Page class, and use the `cache()` helper method.
+
+```crystal
+class Posts::ShowPage < MainLayout
+  include LuckyCache::HtmlHelpers
+  needs post : Post
+
+  def content
+    cache("post:#{post.id}:comments", expires_in: 1.hour) do
+      post.comments.each do |comment|
+        div comment.text
+      end
+    end
+  end
+end
+```
+
 ## Development
 
 
