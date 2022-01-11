@@ -10,18 +10,13 @@ jobs:
   check_format:
     strategy:
       fail-fast: false
-      matrix:
-        crystal_version:
-          - 1.0.0
-          - 1.1.0
-          - 1.2.0
-        experimental:
-          - false
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.experimental }}
-    container: crystallang/crystal:${{ matrix.crystal_version }}-alpine
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2.4.0
+      - name: Install Crystal
+        uses: crystal-lang/install-crystal@v1
+        with:
+          crystal: latest
       - name: Install shards
         run: shards install
       - name: Format
@@ -34,20 +29,16 @@ jobs:
       matrix:
         crystal_version:
           - 1.0.0
-          - 1.1.0
-          - 1.2.0
+          - latest
         experimental:
           - false
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.experimental }}
-    container: crystallang/crystal:${{ matrix.crystal_version }}-alpine
     steps:
       - uses: actions/checkout@v2
-      - name: Cache Crystal
-        uses: actions/cache@v1
+      - uses: crystal-lang/install-crystal@v1
         with:
-          path: ~/.cache/crystal
-          key: ${{ runner.os }}-crystal
+          crystal: ${{matrix.crystal_version}}
       - name: Install dependencies
         run: shards install
       - name: Run tests
