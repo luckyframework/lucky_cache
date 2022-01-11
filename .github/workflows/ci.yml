@@ -11,7 +11,6 @@ jobs:
     strategy:
       fail-fast: false
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.experimental }}
     steps:
       - uses: actions/checkout@v2.4.0
       - name: Install Crystal
