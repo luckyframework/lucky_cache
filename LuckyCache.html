@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 1.2.2">
+<meta name="crystal_docs.project_version" content="master">
+<meta name="crystal_docs.project_name" content="lucky_cache">
+
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+  <meta name="repository-name" content="lucky_cache">
+  <title>LuckyCache - lucky_cache master</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="index.html">
+          lucky_cache
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="lucky_cache/LuckyCache" data-name="luckycache">
+      <a href="LuckyCache.html">LuckyCache</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="lucky_cache/LuckyCache/BaseStore" data-name="luckycache::basestore">
+      <a href="LuckyCache/BaseStore.html">BaseStore</a>
+      
+        <ul>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/BaseStore/CacheKey" data-name="luckycache::basestore::cachekey">
+      <a href="LuckyCache/BaseStore/CacheKey.html">CacheKey</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/Cachable" data-name="luckycache::cachable">
+      <a href="LuckyCache/Cachable.html">Cachable</a>
+      
+    </li>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/CachableTypes" data-name="luckycache::cachabletypes">
+      <a href="LuckyCache/CachableTypes.html">CachableTypes</a>
+      
+    </li>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/CacheItem" data-name="luckycache::cacheitem">
+      <a href="LuckyCache/CacheItem.html">CacheItem</a>
+      
+    </li>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/HabitatSettings" data-name="luckycache::habitatsettings">
+      <a href="LuckyCache/HabitatSettings.html">HabitatSettings</a>
+      
+    </li>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/HtmlHelpers" data-name="luckycache::htmlhelpers">
+      <a href="LuckyCache/HtmlHelpers.html">HtmlHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/MemoryStore" data-name="luckycache::memorystore">
+      <a href="LuckyCache/MemoryStore.html">MemoryStore</a>
+      
+    </li>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/NullStore" data-name="luckycache::nullstore">
+      <a href="LuckyCache/NullStore.html">NullStore</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">module</span> LuckyCache
+
+</h1>
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type">Habitat::SettingsHelpers</li>
+    
+      <li class="other-type">Habitat::TempConfig</li>
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache.cr#L10" target="_blank">
+        lucky_cache.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache/cachable.cr#L2" target="_blank">
+        lucky_cache/cachable.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache/cache_item.cr#L1" target="_blank">
+        lucky_cache/cache_item.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache/stores/base_store.cr#L1" target="_blank">
+        lucky_cache/stores/base_store.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache/stores/memory_store.cr#L1" target="_blank">
+        lucky_cache/stores/memory_store.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache/stores/null_store.cr#L1" target="_blank">
+        lucky_cache/stores/null_store.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="HABITAT_SETTINGS">
+        <strong>HABITAT_SETTINGS</strong> = <code>[{decl: storage : <span class="t">LuckyCache</span><span class="t">::</span><span class="t">BaseStore</span> <span class="o">=</span> <span class="t">LuckyCache</span><span class="t">::</span><span class="t">NullStore</span>.<span class="k">new</span>, example: <span class="n">nil</span>, validation: <span class="n">nil</span>}, {decl: default_duration : <span class="t">Time</span><span class="t">::</span><span class="t">Span</span> <span class="o">=</span> <span class="n">1</span>.minute, example: <span class="n">nil</span>, validation: <span class="n">nil</span>}] <span class="k">of</span> <span class="t">Nil</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="VERSION">
+        <strong>VERSION</strong> = <code><span class="s">&quot;0.1.0&quot;</span></code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+
+
+  <h2>
+    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#configure%28%26%29-class-method" class="signature"><strong>.configure</strong>(&)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#settings-class-method" class="signature"><strong>.settings</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#settings-instance-method" class="signature"><strong>#settings</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+  <h2>
+    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="configure(&amp;)-class-method">
+      <div class="signature">
+        
+        def self.<strong>configure</strong>(&)
+
+        <a class="method-permalink" href="#configure%28%26%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="settings-class-method">
+      <div class="signature">
+        
+        def self.<strong>settings</strong>
+
+        <a class="method-permalink" href="#settings-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="settings-instance-method">
+      <div class="signature">
+        
+        def <strong>settings</strong>
+
+        <a class="method-permalink" href="#settings-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

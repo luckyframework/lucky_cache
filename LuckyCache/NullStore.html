@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 1.2.2">
+<meta name="crystal_docs.project_version" content="master">
+<meta name="crystal_docs.project_name" content="lucky_cache">
+
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+  <meta name="repository-name" content="lucky_cache">
+  <title>LuckyCache::NullStore - lucky_cache master</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../index.html">
+          lucky_cache
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="lucky_cache/LuckyCache" data-name="luckycache">
+      <a href="../LuckyCache.html">LuckyCache</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="lucky_cache/LuckyCache/BaseStore" data-name="luckycache::basestore">
+      <a href="../LuckyCache/BaseStore.html">BaseStore</a>
+      
+        <ul>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/BaseStore/CacheKey" data-name="luckycache::basestore::cachekey">
+      <a href="../LuckyCache/BaseStore/CacheKey.html">CacheKey</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/Cachable" data-name="luckycache::cachable">
+      <a href="../LuckyCache/Cachable.html">Cachable</a>
+      
+    </li>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/CachableTypes" data-name="luckycache::cachabletypes">
+      <a href="../LuckyCache/CachableTypes.html">CachableTypes</a>
+      
+    </li>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/CacheItem" data-name="luckycache::cacheitem">
+      <a href="../LuckyCache/CacheItem.html">CacheItem</a>
+      
+    </li>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/HabitatSettings" data-name="luckycache::habitatsettings">
+      <a href="../LuckyCache/HabitatSettings.html">HabitatSettings</a>
+      
+    </li>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/HtmlHelpers" data-name="luckycache::htmlhelpers">
+      <a href="../LuckyCache/HtmlHelpers.html">HtmlHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="lucky_cache/LuckyCache/MemoryStore" data-name="luckycache::memorystore">
+      <a href="../LuckyCache/MemoryStore.html">MemoryStore</a>
+      
+    </li>
+  
+  <li class=" current" data-id="lucky_cache/LuckyCache/NullStore" data-name="luckycache::nullstore">
+      <a href="../LuckyCache/NullStore.html">NullStore</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">struct</span> LuckyCache::NullStore
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../LuckyCache/NullStore.html">LuckyCache::NullStore</a></li><li class="superclass"><a href="../LuckyCache/BaseStore.html">LuckyCache::BaseStore</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache/stores/null_store.cr#L2" target="_blank">
+        lucky_cache/stores/null_store.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#delete%28key%3ACacheKey%29-instance-method" class="signature"><strong>#delete</strong>(key : CacheKey)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#fetch%28key%3ACacheKey%2C%2A%2Cas%3AArray%28T%29.class%2Cexpires_in%3ATime%3A%3ASpan%3DLuckyCache.settings.default_duration%2C%26%29forallT-instance-method" class="signature"><strong>#fetch</strong>(key : CacheKey, *, as : <span class="t">Array</span>(<span class="t">T</span>).<span class="k">class</span>, expires_in : Time::Span = <span class="t">LuckyCache</span>.settings.default_duration, &) forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#fetch%28key%3ACacheKey%2C%2A%2Cas%3AT.class%2Cexpires_in%3ATime%3A%3ASpan%3DLuckyCache.settings.default_duration%2C%26%29forallT-instance-method" class="signature"><strong>#fetch</strong>(key : CacheKey, *, as : <span class="t">T</span>.<span class="k">class</span>, expires_in : Time::Span = <span class="t">LuckyCache</span>.settings.default_duration, &) forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#flush%3ANil-instance-method" class="signature"><strong>#flush</strong> : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read%28key%3ACacheKey%29%3ACacheItem%3F-instance-method" class="signature"><strong>#read</strong>(key : CacheKey) : CacheItem?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#write%28key%3ACacheKey%2C%2A%2Cexpires_in%3ATime%3A%3ASpan%3DLuckyCache.settings.default_duration%2C%26%29-instance-method" class="signature"><strong>#write</strong>(key : CacheKey, *, expires_in : Time::Span = <span class="t">LuckyCache</span>.settings.default_duration, &)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+  <h3>Instance methods inherited from struct <code><a href="../LuckyCache/BaseStore.html">LuckyCache::BaseStore</a></code></h3>
+  
+  
+    <a href="../LuckyCache/BaseStore.html#delete%28key%3ACacheKey%29-instance-method" class="tooltip">
+      <span>delete(key : CacheKey)</span>
+    delete</a>, 
+    
+  
+    <a href="../LuckyCache/BaseStore.html#fetch%28key%3ACacheKey%2C%2A%2Cas%3AArray%28T%29.class%2Cexpires_in%3ATime%3A%3ASpan%3DLuckyCache.settings.default_duration%2C%26%29forallT-instance-method" class="tooltip">
+      <span>fetch(key : CacheKey, *, as : <span class="t">Array</span>(<span class="t">T</span>).<span class="k">class</span>, expires_in : Time::Span = <span class="t">LuckyCache</span>.settings.default_duration, &) forall T<br/>fetch(key : CacheKey, *, as : <span class="t">T</span>.<span class="k">class</span>, expires_in : Time::Span = <span class="t">LuckyCache</span>.settings.default_duration, &) forall T</span>
+    fetch</a>, 
+    
+  
+    <a href="../LuckyCache/BaseStore.html#flush%3ANil-instance-method" class="tooltip">
+      <span>flush : Nil</span>
+    flush</a>, 
+    
+  
+    <a href="../LuckyCache/BaseStore.html#initialize-instance-method" class="tooltip">
+      <span>initialize</span>
+    initialize</a>, 
+    
+  
+    <a href="../LuckyCache/BaseStore.html#read%28key%3ACacheKey%29%3ACacheItem%3F-instance-method" class="tooltip">
+      <span>read(key : CacheKey) : CacheItem?</span>
+    read</a>, 
+    
+  
+    <a href="../LuckyCache/BaseStore.html#write%28key%3ACacheKey%2C%2A%2Cexpires_in%3ATime%3A%3ASpan%3DLuckyCache.settings.default_duration%2C%26%29-instance-method" class="tooltip">
+      <span>write(key : CacheKey, *, expires_in : Time::Span = <span class="t">LuckyCache</span>.settings.default_duration, &)</span>
+    write</a>
+    
+  
+
+
+    
+
+  <h3>Constructor methods inherited from struct <code><a href="../LuckyCache/BaseStore.html">LuckyCache::BaseStore</a></code></h3>
+  
+  
+    <a href="../LuckyCache/BaseStore.html#new-class-method" class="tooltip">
+      <span>new</span>
+    new</a>
+    
+  
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="delete(key:CacheKey)-instance-method">
+      <div class="signature">
+        
+        def <strong>delete</strong>(key : <a href="../LuckyCache/BaseStore/CacheKey.html">CacheKey</a>)
+
+        <a class="method-permalink" href="#delete%28key%3ACacheKey%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache/stores/null_store.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="fetch(key:CacheKey,*,as:Array(T).class,expires_in:Time::Span=LuckyCache.settings.default_duration,&amp;)forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>fetch</strong>(key : <a href="../LuckyCache/BaseStore/CacheKey.html">CacheKey</a>, *, as : <span class="t">Array</span>(<span class="t">T</span>).<span class="k">class</span>, expires_in : Time::Span = <span class="t">LuckyCache</span>.settings.default_duration, &) forall T
+
+        <a class="method-permalink" href="#fetch%28key%3ACacheKey%2C%2A%2Cas%3AArray%28T%29.class%2Cexpires_in%3ATime%3A%3ASpan%3DLuckyCache.settings.default_duration%2C%26%29forallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache/stores/null_store.cr#L19" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="fetch(key:CacheKey,*,as:T.class,expires_in:Time::Span=LuckyCache.settings.default_duration,&amp;)forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>fetch</strong>(key : <a href="../LuckyCache/BaseStore/CacheKey.html">CacheKey</a>, *, as : <span class="t">T</span>.<span class="k">class</span>, expires_in : Time::Span = <span class="t">LuckyCache</span>.settings.default_duration, &) forall T
+
+        <a class="method-permalink" href="#fetch%28key%3ACacheKey%2C%2A%2Cas%3AT.class%2Cexpires_in%3ATime%3A%3ASpan%3DLuckyCache.settings.default_duration%2C%26%29forallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache/stores/null_store.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="flush:Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>flush</strong> : Nil
+
+        <a class="method-permalink" href="#flush%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache/stores/null_store.cr#L15" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read(key:CacheKey):CacheItem?-instance-method">
+      <div class="signature">
+        
+        def <strong>read</strong>(key : <a href="../LuckyCache/BaseStore/CacheKey.html">CacheKey</a>) : <a href="../LuckyCache/CacheItem.html">CacheItem</a>?
+
+        <a class="method-permalink" href="#read%28key%3ACacheKey%29%3ACacheItem%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache/stores/null_store.cr#L3" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="write(key:CacheKey,*,expires_in:Time::Span=LuckyCache.settings.default_duration,&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>write</strong>(key : <a href="../LuckyCache/BaseStore/CacheKey.html">CacheKey</a>, *, expires_in : Time::Span = <span class="t">LuckyCache</span>.settings.default_duration, &)
+
+        <a class="method-permalink" href="#write%28key%3ACacheKey%2C%2A%2Cexpires_in%3ATime%3A%3ASpan%3DLuckyCache.settings.default_duration%2C%26%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/luckyframework/lucky_cache/blob/13e0a8352de10e123ec1e175e72ff48c8ea4f4c7/src/lucky_cache/stores/null_store.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
