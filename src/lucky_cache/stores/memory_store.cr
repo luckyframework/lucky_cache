@@ -66,5 +66,9 @@ module LuckyCache
         write(key, expires_in: expires_in) { yield }
       end
     end
+
+    def size : Int32
+      @cache.size
+    end
   end
 end

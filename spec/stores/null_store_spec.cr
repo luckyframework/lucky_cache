@@ -111,4 +111,18 @@ describe LuckyCache::NullStore do
       cache.responds_to?(:flush).should eq(true)
     end
   end
+
+  describe "#size" do
+    it "returns 0 because it doesn't really cache anything" do
+      cache = LuckyCache::NullStore.new
+      cache.size.should eq(0)
+
+      cache.write("numbers") { 123 }
+      cache.write("letters") { "abc" }
+      cache.size.should eq(0)
+
+      cache.flush
+      cache.size.should eq(0)
+    end
+  end
 end
