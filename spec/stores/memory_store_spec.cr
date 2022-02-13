@@ -152,4 +152,18 @@ describe LuckyCache::MemoryStore do
       cache.read("false").should be_nil
     end
   end
+
+  describe "#size" do
+    it "returns the total number of items in the cache" do
+      cache = LuckyCache::MemoryStore.new
+      cache.size.should eq(0)
+
+      cache.write("numbers") { 123 }
+      cache.write("letters") { "abc" }
+      cache.size.should eq(2)
+
+      cache.flush
+      cache.size.should eq(0)
+    end
+  end
 end

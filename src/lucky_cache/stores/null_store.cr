@@ -23,5 +23,9 @@ module LuckyCache
     def fetch(key : CacheKey, *, as : T.class, expires_in : Time::Span = LuckyCache.settings.default_duration, &) forall T
       yield
     end
+
+    def size : Int32
+      0
+    end
   end
 end

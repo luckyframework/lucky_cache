@@ -13,5 +13,7 @@ module LuckyCache
     abstract def fetch(key : CacheKey, *, as : Array(T).class, expires_in : Time::Span = LuckyCache.settings.default_duration, &) forall T
 
     abstract def fetch(key : CacheKey, *, as : T.class, expires_in : Time::Span = LuckyCache.settings.default_duration, &) forall T
+
+    abstract def size : Int32
   end
 end
