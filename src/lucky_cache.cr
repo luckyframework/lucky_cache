@@ -8,7 +8,7 @@ require "./lucky_cache/stores/*"
 require "./lucky_cache/*"
 
 module LuckyCache
-  VERSION = "0.1.0"
+  VERSION = "0.1.1"
 
   Habitat.create do
     setting storage : LuckyCache::BaseStore = LuckyCache::NullStore.new
