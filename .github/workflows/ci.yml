@@ -28,7 +28,7 @@ jobs:
       fail-fast: false
       matrix:
         crystal_version:
-          - 1.0.0
+          - 1.4.0
           - latest
         experimental:
           - false
