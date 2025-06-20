@@ -201,6 +201,48 @@ describe LuckyCache::RedisStore do
 
       cache.flush
     end
+
+    it "stores arrays of basic types" do
+      redis_client = Redis::Client.new
+      cache = LuckyCache::RedisStore.new(redis_client)
+      cache.flush
+
+      str_array = ["hello", "world"]
+      int_array = [1, 2, 3]
+      bool_array = [true, false, true]
+
+      cache.write("strings") { str_array }
+      cache.write("ints") { int_array }
+      cache.write("bools") { bool_array }
+
+      cache.read("strings").not_nil!.value.as(Array(String)).should eq(str_array)
+      cache.read("ints").not_nil!.value.as(Array(Int32)).should eq(int_array)
+      cache.read("bools").not_nil!.value.as(Array(Bool)).should eq(bool_array)
+
+      cache.flush
+    end
+  end
+
+  describe "workaround for custom objects" do
+    it "can cache JSON representations of custom objects" do
+      redis_client = Redis::Client.new
+      cache = LuckyCache::RedisStore.new(redis_client)
+      cache.flush
+
+      # Instead of caching the User object directly, cache its JSON representation
+      user_data = Hash(String, JSON::Any).new
+      user_data["email"] = JSON::Any.new("fred@email.net")
+      cache.write("user:fred") { JSON::Any.new(user_data) }
+
+      # Retrieve and reconstruct
+      cached_data = cache.read("user:fred").not_nil!.value.as(JSON::Any)
+      cached_data["email"].as_s.should eq("fred@email.net")
+
+      # You can reconstruct the User object from the JSON data
+      # user = User.new(cached_data["email"].as_s)
+
+      cache.flush
+    end
   end
 end
 

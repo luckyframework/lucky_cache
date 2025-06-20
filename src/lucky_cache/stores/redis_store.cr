@@ -25,7 +25,7 @@ module LuckyCache
       # For Redis storage, we need to check if the data is serializable
       # Custom Cachable objects cannot be serialized to JSON without custom serialization logic
       unless serializable?(data)
-        raise ArgumentError.new("RedisStore cannot serialize custom Cachable objects. Use MemoryStore for custom objects or implement JSON serialization.")
+        raise ArgumentError.new("RedisStore cannot serialize custom Cachable objects. Use MemoryStore for custom objects or store serializable representations (Hash, NamedTuple, JSON::Any).")
       end
 
       cache_item = CacheItem.new(

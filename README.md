@@ -59,7 +59,22 @@ LuckyCache.configure do |settings|
 end
 ```
 
-**Note:** Redis store only supports serializable types (String, Int32, Int64, Float64, Bool, Time, UUID, JSON::Any and Arrays of these types). Custom objects that include `LuckyCache::Cachable` are not supported by RedisStore. Use MemoryStore for caching custom objects or implement JSON serialization for your objects.
+**Note:** Redis store only supports serializable types (String, Int32, Int64, Float64, Bool, Time, UUID, JSON::Any and Arrays of these types). Custom objects that include `LuckyCache::Cachable` are not supported by RedisStore. Use MemoryStore for caching custom objects.
+
+**Workaround for custom objects:** You can cache JSON representations of your objects:
+
+```crystal
+# Instead of caching the object directly
+# cache.write("user:123") { User.new("test@example.com") } # This will raise an error
+
+# Cache a JSON representation
+user_data = {"id" => 123, "email" => "test@example.com"}
+cache.write("user:123") { JSON::Any.new(user_data) }
+
+# Retrieve and reconstruct
+cached_data = cache.read("user:123").not_nil!.value.as(JSON::Any)
+user = User.new(cached_data["email"].as_s)
+```
 
 ### Page fragment cache
 
