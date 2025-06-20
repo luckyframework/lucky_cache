@@ -34,6 +34,33 @@ some_object = cache.fetch("some_key", as: SomeObject) do
 end
 ```
 
+### Using Redis Store
+
+To use Redis as your cache backend, add the Redis shard to your dependencies:
+
+```yaml
+dependencies:
+  redis:
+    github: jgaskins/redis
+```
+
+Then configure LuckyCache to use the Redis store:
+
+```crystal
+require "lucky_cache"
+require "redis"
+
+LuckyCache.configure do |settings|
+  settings.storage = LuckyCache::RedisStore.new(
+    Redis::Client.new(host: "localhost", port: 6379),
+    prefix: "myapp:cache:"
+  )
+  settings.default_duration = 5.minutes
+end
+```
+
+**Note:** Redis store only supports serializable types (String, Int32, Int64, Float64, Bool, Time, UUID, JSON::Any and Arrays of these types). Custom objects that include `LuckyCache::Cachable` are not supported by RedisStore. Use MemoryStore for caching custom objects or implement JSON serialization for your objects.
+
 ### Page fragment cache
 
 You can cache portions of your page by including the `LuckyCache::HtmlHelpers` module
