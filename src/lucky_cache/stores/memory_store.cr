@@ -18,7 +18,9 @@ module LuckyCache
     def write(key : CacheKey, *, expires_in : Time::Span = LuckyCache.settings.default_duration, &)
       data = yield
 
-      if data.is_a?(Array)
+      if data.is_a?(Array(String)) || data.is_a?(Array(Int32)) || data.is_a?(Array(Int64)) || data.is_a?(Array(Float64)) || data.is_a?(Array(Bool))
+        stored_data = data
+      elsif data.is_a?(Array)
         stored_data = [] of Cachable
         data.each { |d| stored_data << d }
       else
@@ -49,7 +51,11 @@ module LuckyCache
     def fetch(key : CacheKey, *, as : Array(T).class, expires_in : Time::Span = LuckyCache.settings.default_duration, &) forall T
       if cache_item = read(key)
         new_array = Array(T).new
-        cache_item.value.as(Array(LuckyCache::Cachable)).each { |v| new_array << v.as(T) }
+        {% if T < LuckyCache::Cachable %}
+          cache_item.value.as(Array(LuckyCache::Cachable)).each { |v| new_array << v.as(T) }
+        {% else %}
+          cache_item.value.as(Array(T)).each { |v| new_array << v }
+        {% end %}
         new_array
       else
         write(key, expires_in: expires_in) { yield }

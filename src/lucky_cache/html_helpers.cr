@@ -8,7 +8,7 @@ module LuckyCache::HtmlHelpers
   #   end
   # end
   # ```
-  def cache(key, *, expires_in : Time::Span?)
+  def cache(key, *, expires_in : Time::Span?, &)
     cache = LuckyCache.settings.storage
     expires = expires_in || LuckyCache.settings.default_duration
 

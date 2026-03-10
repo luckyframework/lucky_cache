@@ -73,6 +73,92 @@ describe LuckyCache::MemoryStore do
       friends.map(&.title).should contain("learn about cash")
     end
 
+    it "caches an array of strings" do
+      cache = LuckyCache::MemoryStore.new
+      counter = 0
+      cache.fetch("tags", as: Array(String)) do
+        counter += 1
+        ["foo", "bar", "baz"]
+      end
+      result = cache.fetch("tags", as: Array(String)) do
+        counter += 1
+        ["foo", "bar", "baz"]
+      end
+
+      result.should be_a(Array(String))
+      counter.should eq(1)
+      result.size.should eq(3)
+      result.should eq(["foo", "bar", "baz"])
+    end
+
+    it "caches an array of Int32" do
+      cache = LuckyCache::MemoryStore.new
+      counter = 0
+      cache.fetch("numbers", as: Array(Int32)) do
+        counter += 1
+        [1, 2, 3]
+      end
+      result = cache.fetch("numbers", as: Array(Int32)) do
+        counter += 1
+        [1, 2, 3]
+      end
+
+      result.should be_a(Array(Int32))
+      counter.should eq(1)
+      result.should eq([1, 2, 3])
+    end
+
+    it "caches an array of Int64" do
+      cache = LuckyCache::MemoryStore.new
+      counter = 0
+      cache.fetch("big_numbers", as: Array(Int64)) do
+        counter += 1
+        [100_i64, 200_i64]
+      end
+      result = cache.fetch("big_numbers", as: Array(Int64)) do
+        counter += 1
+        [100_i64, 200_i64]
+      end
+
+      result.should be_a(Array(Int64))
+      counter.should eq(1)
+      result.should eq([100_i64, 200_i64])
+    end
+
+    it "caches an array of Float64" do
+      cache = LuckyCache::MemoryStore.new
+      counter = 0
+      cache.fetch("scores", as: Array(Float64)) do
+        counter += 1
+        [1.5, 2.7, 3.9]
+      end
+      result = cache.fetch("scores", as: Array(Float64)) do
+        counter += 1
+        [1.5, 2.7, 3.9]
+      end
+
+      result.should be_a(Array(Float64))
+      counter.should eq(1)
+      result.should eq([1.5, 2.7, 3.9])
+    end
+
+    it "caches an array of Bool" do
+      cache = LuckyCache::MemoryStore.new
+      counter = 0
+      cache.fetch("flags", as: Array(Bool)) do
+        counter += 1
+        [true, false, true]
+      end
+      result = cache.fetch("flags", as: Array(Bool)) do
+        counter += 1
+        [true, false, true]
+      end
+
+      result.should be_a(Array(Bool))
+      counter.should eq(1)
+      result.should eq([true, false, true])
+    end
+
     it "caches basic types" do
       cache = LuckyCache::MemoryStore.new
       str = cache.fetch("string:key", as: String) { "test" }
