@@ -14,6 +14,12 @@ Cache content within your Lucky application.
 
 2. Run `shards install`
 
+## Adapters
+
+LuckyCache comes with a built-in `MemoryStore`, but if you need extneral storage, check out one of these adapters
+
+* [Redis Cache](https://github.com/luckyframework/lucky_cache_redis_store)
+
 ## Usage
 
 ```crystal
