@@ -1,7 +1,7 @@
 require "../spec_helper"
 
 class User
-  include LuckyCache::Cachable
+  include LuckyCache::Cacheable
   property email : String
 
   def initialize(@email : String)
@@ -9,7 +9,7 @@ class User
 end
 
 class Post
-  include LuckyCache::Cachable
+  include LuckyCache::Cacheable
   property title : String
 
   def initialize(@title : String)
@@ -49,7 +49,7 @@ describe LuckyCache::NullStore do
 
       result.should be_a(Array(User))
       counter.should eq(2)
-      friends = result.not_nil!
+      friends = result.as(Array(User))
       friends.size.should eq(2)
       friends.map(&.email).should contain("chris@email.net")
     end
@@ -68,7 +68,7 @@ describe LuckyCache::NullStore do
 
       result.should be_a(Array(Post))
       counter.should eq(2)
-      friends = result.not_nil!
+      friends = result.as(Array(Post))
       friends.size.should eq(2)
       friends.map(&.title).should contain("learn about cash")
     end

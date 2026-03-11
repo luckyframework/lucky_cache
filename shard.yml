@@ -4,7 +4,7 @@ version: 0.1.1
 authors:
   - Jeremy Woertink <jeremywoertink@gmail.com>
 
-crystal: ">= 1.4.0"
+crystal: ">= 1.16.0"
 
 license: MIT
 
@@ -13,12 +13,12 @@ dependencies:
     github: wyhaines/splay_tree_map.cr
   habitat:
     github: luckyframework/habitat
-    version: ~> 0.4.7
+    version: ~> 0.4.9
 
 development_dependencies:
   timecop:
     github: crystal-community/timecop.cr
-    branch: master
+    version: ~> 0.6.0
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 1.0.0
+    version: ~> 1.6.4

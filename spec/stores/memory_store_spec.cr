@@ -1,7 +1,7 @@
 require "../spec_helper"
 
 class User
-  include LuckyCache::Cachable
+  include LuckyCache::Cacheable
   property email : String
 
   def initialize(@email : String)
@@ -9,7 +9,7 @@ class User
 end
 
 class Post
-  include LuckyCache::Cachable
+  include LuckyCache::Cacheable
   property title : String
 
   def initialize(@title : String)
@@ -49,7 +49,7 @@ describe LuckyCache::MemoryStore do
 
       result.should be_a(Array(User))
       counter.should eq(1)
-      friends = result.not_nil!
+      friends = result.as(Array(User))
       friends.size.should eq(2)
       friends.map(&.email).should contain("chris@email.net")
     end
@@ -68,7 +68,7 @@ describe LuckyCache::MemoryStore do
 
       result.should be_a(Array(Post))
       counter.should eq(1)
-      friends = result.not_nil!
+      friends = result.as(Array(Post))
       friends.size.should eq(2)
       friends.map(&.title).should contain("learn about cash")
     end
@@ -93,10 +93,10 @@ describe LuckyCache::MemoryStore do
           UUID.random
         end
         Timecop.travel(12.hours.from_now) do
-          cache.read("coupon").not_nil!.expired?.should eq(false)
+          cache.read("coupon").as(LuckyCache::CacheItem).expired?.should eq(false)
         end
         Timecop.travel(35.hours.from_now) do
-          cache.read("coupon").not_nil!.expired?.should eq(false)
+          cache.read("coupon").as(LuckyCache::CacheItem).expired?.should eq(false)
         end
         Timecop.travel(49.hours.from_now) do
           cache.read("coupon").should eq(nil)
