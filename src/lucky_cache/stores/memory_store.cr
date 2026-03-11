@@ -18,6 +18,8 @@ module LuckyCache
     def write(key : CacheKey, *, expires_in : Time::Span = LuckyCache.settings.default_duration, &)
       data = yield
 
+      # This is because types like `String`, `Int32`, etc... don't include `Cacheable` like a custom type would.
+      # In order to support these, we have to account for them separately.
       if data.is_a?(Array(String)) || data.is_a?(Array(Int32)) || data.is_a?(Array(Int64)) || data.is_a?(Array(Float64)) || data.is_a?(Array(Bool))
         stored_data = data
       elsif data.is_a?(Array)
