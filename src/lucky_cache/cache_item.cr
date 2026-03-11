@@ -1,10 +1,10 @@
 module LuckyCache
   struct CacheItem
-    getter value : CachableTypes
+    getter value : CacheableTypes
     getter expires_in : Time::Span
     private getter expiration : Time
 
-    def initialize(@value : CachableTypes, @expires_in : Time::Span)
+    def initialize(@value : CacheableTypes, @expires_in : Time::Span)
       @expiration = @expires_in.from_now
     end
 

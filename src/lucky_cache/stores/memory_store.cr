@@ -21,8 +21,8 @@ module LuckyCache
       if data.is_a?(Array(String)) || data.is_a?(Array(Int32)) || data.is_a?(Array(Int64)) || data.is_a?(Array(Float64)) || data.is_a?(Array(Bool))
         stored_data = data
       elsif data.is_a?(Array)
-        stored_data = [] of Cachable
-        data.each { |d| stored_data << d }
+        stored_data = [] of Cacheable
+        data.each { |datum| stored_data << datum }
       else
         stored_data = data
       end
@@ -45,16 +45,16 @@ module LuckyCache
       cache.clear
     end
 
-    # If the `CacheItem` exists, it will map the `Array(Cachable)`
+    # If the `CacheItem` exists, it will map the `Array(Cacheable)`
     # in to `Array(T)`. If no item is found, write the block value
     # and return the block value
     def fetch(key : CacheKey, *, as : Array(T).class, expires_in : Time::Span = LuckyCache.settings.default_duration, &) forall T
       if cache_item = read(key)
         new_array = Array(T).new
-        {% if T < LuckyCache::Cachable %}
-          cache_item.value.as(Array(LuckyCache::Cachable)).each { |v| new_array << v.as(T) }
+        {% if T < LuckyCache::Cacheable %}
+          cache_item.value.as(Array(LuckyCache::Cacheable)).each { |val| new_array << val.as(T) }
         {% else %}
-          cache_item.value.as(Array(T)).each { |v| new_array << v }
+          cache_item.value.as(Array(T)).each { |val| new_array << val }
         {% end %}
         new_array
       else
@@ -62,7 +62,7 @@ module LuckyCache
       end
     end
 
-    # If the `CacheItem` exists, it will cast the `Cachable`
+    # If the `CacheItem` exists, it will cast the `Cacheable`
     # in to `T`. If no item is found, write the block value
     # and return the block value
     def fetch(key : CacheKey, *, as : T.class, expires_in : Time::Span = LuckyCache.settings.default_duration, &) forall T
