@@ -18,7 +18,11 @@ module LuckyCache
     def write(key : CacheKey, *, expires_in : Time::Span = LuckyCache.settings.default_duration, &)
       data = yield
 
-      if data.is_a?(Array)
+      # This is because types like `String`, `Int32`, etc... don't include `Cacheable` like a custom type would.
+      # In order to support these, we have to account for them separately.
+      if data.is_a?(Array(String)) || data.is_a?(Array(Int32)) || data.is_a?(Array(Int64)) || data.is_a?(Array(Float64)) || data.is_a?(Array(Bool))
+        stored_data = data
+      elsif data.is_a?(Array)
         stored_data = [] of Cacheable
         data.each { |datum| stored_data << datum }
       else
@@ -49,7 +53,11 @@ module LuckyCache
     def fetch(key : CacheKey, *, as : Array(T).class, expires_in : Time::Span = LuckyCache.settings.default_duration, &) forall T
       if cache_item = read(key)
         new_array = Array(T).new
-        cache_item.value.as(Array(LuckyCache::Cacheable)).each { |v| new_array << v.as(T) }
+        {% if T < LuckyCache::Cacheable %}
+          cache_item.value.as(Array(LuckyCache::Cacheable)).each { |val| new_array << val.as(T) }
+        {% else %}
+          cache_item.value.as(Array(T)).each { |val| new_array << val }
+        {% end %}
         new_array
       else
         write(key, expires_in: expires_in) { yield }
