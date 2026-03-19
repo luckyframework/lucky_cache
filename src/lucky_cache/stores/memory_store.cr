@@ -7,10 +7,15 @@ module LuckyCache
     end
 
     # Returns the `CacheItem` or nil if the `key` is not found.
-    # If the key is found, but the item is expired, it returns nil.
+    # If the key is found, but the item is expired, remove it and return nil.
     def read(key : CacheKey) : CacheItem?
       if item = cache[key]?
-        item.expired? ? nil : item
+        if item.expired?
+          cache.delete(key)
+          nil
+        else
+          item
+        end
       end
     end
 
@@ -75,6 +80,7 @@ module LuckyCache
       end
     end
 
+    # The total number of items in the cache.
     def size : Int32
       @cache.size
     end

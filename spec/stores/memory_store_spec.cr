@@ -204,6 +204,21 @@ describe LuckyCache::MemoryStore do
         cache.read("key").should eq(nil)
       end
     end
+
+    it "evicts expired items from the cache to free memory" do
+      cache = LuckyCache::MemoryStore.new
+      cache.write("key1", expires_in: 1.minute) { "data1" }
+      cache.write("key2", expires_in: 5.minutes) { "data2" }
+      cache.size.should eq(2)
+
+      Timecop.travel(90.seconds.from_now) do
+        cache.read("key1").should eq(nil)
+        cache.size.should eq(1)
+
+        cache.read("key2").should_not be_nil
+        cache.size.should eq(1)
+      end
+    end
   end
 
   describe "#delete" do
