@@ -66,5 +66,17 @@ describe LuckyCache::MemoryStore do
       cache.flush
       cache.size.should eq(0)
     end
+
+    it "does not lose increments" do
+      cache = LuckyCache::MemoryStore.new
+
+      in_parallel do |_worker|
+        PARALLEL_ITERATIONS.times do
+          cache.increment("counter")
+        end
+      end
+
+      cache.read("counter").as(LuckyCache::CacheItem).value.should eq((PARALLEL_WORKERS * PARALLEL_ITERATIONS).to_i64)
+    end
   end
 end

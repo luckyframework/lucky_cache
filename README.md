@@ -18,7 +18,7 @@ Cache content within your Lucky application.
 
 LuckyCache comes with a built-in `MemoryStore`, but if you need extneral storage, check out one of these adapters
 
-* [Redis Cache](https://github.com/luckyframework/lucky_cache_redis_store)
+- [Redis Cache](https://github.com/luckyframework/lucky_cache_redis_store)
 
 ## Usage
 
@@ -39,6 +39,23 @@ some_object = cache.fetch("some_key", as: SomeObject) do
   SomeObject.new
 end
 ```
+
+### Counters
+
+Use `increment` and `decrement` for counters. Each call is atomic, so no updates
+are lost when several fibers or threads change the same key.
+
+```crystal
+cache = LuckyCache.settings.storage
+
+cache.increment("visits")                       # => 1
+cache.increment("visits", by: 5)                # => 6
+cache.decrement("visits")                       # => 5
+cache.increment("logins", expires_in: 1.minute) # => 1
+```
+
+A missing or expired key starts from 0 and expires after `expires_in`.
+An existing key keeps the expiration it already had.
 
 ### Page fragment cache
 
@@ -62,8 +79,6 @@ end
 
 ## Development
 
-
-
 ## Contributing
 
 1. Fork it (<https://github.com/luckyframework/lucky_cache/fork>)
@@ -78,5 +93,5 @@ end
 
 ## Thanks & attributions
 
-* Initial structure and some code was pulled from the original LuckyCache by [@matthewmcgarvey](https://github.com/matthewmcgarvey/lucky_cache).
-* Lots of inspiration on Cache store was from [@mamantoha](https://github.com/crystal-cache/cache)
+- Initial structure and some code was pulled from the original LuckyCache by [@matthewmcgarvey](https://github.com/matthewmcgarvey/lucky_cache).
+- Lots of inspiration on Cache store was from [@mamantoha](https://github.com/crystal-cache/cache)

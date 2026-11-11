@@ -77,6 +77,25 @@ module LuckyCache
       end
     end
 
+    def increment(key : CacheKey, by : Int = 1, *, expires_in : Time::Span = LuckyCache.settings.default_duration) : Int64
+      lock.synchronize do
+        item = unexpired_item(key)
+        current = case value = item.try(&.value)
+                  when Nil          then 0_i64
+                  when Int32, Int64 then value.to_i64
+                  else
+                    raise ArgumentError.new("Cannot increment #{key.inspect} because it holds a #{value.class}")
+                  end
+        total = current + by
+        cache[key] = item ? item.with_value(total) : CacheItem.new(value: total, expires_in: expires_in)
+        total
+      end
+    end
+
+    def decrement(key : CacheKey, by : Int = 1, *, expires_in : Time::Span = LuckyCache.settings.default_duration) : Int64
+      increment(key, -by, expires_in: expires_in)
+    end
+
     # The total number of items in the cache.
     def size : Int32
       lock.synchronize { cache.size }

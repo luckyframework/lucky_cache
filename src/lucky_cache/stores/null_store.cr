@@ -24,6 +24,14 @@ module LuckyCache
       yield
     end
 
+    def increment(key : CacheKey, by : Int = 1, *, expires_in : Time::Span = LuckyCache.settings.default_duration) : Int64
+      by.to_i64
+    end
+
+    def decrement(key : CacheKey, by : Int = 1, *, expires_in : Time::Span = LuckyCache.settings.default_duration) : Int64
+      -by.to_i64
+    end
+
     def size : Int32
       0
     end

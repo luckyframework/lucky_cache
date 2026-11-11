@@ -8,6 +8,13 @@ module LuckyCache
       @expiration = @expires_in.from_now
     end
 
+    def initialize(@value : CacheableTypes, @expires_in : Time::Span, @expiration : Time)
+    end
+
+    protected def with_value(value : CacheableTypes) : CacheItem
+      CacheItem.new(value, expires_in, expiration)
+    end
+
     def expired?
       expiration < Time.utc
     end
