@@ -221,6 +221,73 @@ describe LuckyCache::MemoryStore do
     end
   end
 
+  describe "#increment" do
+    it "starts a missing key at the increment amount" do
+      cache = LuckyCache::MemoryStore.new
+      cache.increment("hits").should eq(1_i64)
+      cache.read("hits").as(LuckyCache::CacheItem).value.should eq(1_i64)
+    end
+
+    it "adds to the existing value" do
+      cache = LuckyCache::MemoryStore.new
+      cache.increment("hits")
+      cache.increment("hits").should eq(2_i64)
+      cache.increment("hits", by: 5).should eq(7_i64)
+    end
+
+    it "increments values written as Int32" do
+      cache = LuckyCache::MemoryStore.new
+      cache.write("hits") { 10 }
+      cache.increment("hits").should eq(11_i64)
+    end
+
+    it "keeps the original expiration when incrementing an existing key" do
+      cache = LuckyCache::MemoryStore.new
+      Timecop.freeze(Time.local(2042, 3, 17, 21, 49)) do
+        cache.increment("hits", expires_in: 1.minute)
+        Timecop.travel(45.seconds.from_now) do
+          cache.increment("hits", expires_in: 1.minute).should eq(2_i64)
+        end
+        Timecop.travel(61.seconds.from_now) do
+          cache.read("hits").should be_nil
+        end
+      end
+    end
+
+    it "starts over once the key has expired" do
+      cache = LuckyCache::MemoryStore.new
+      Timecop.freeze(Time.local(2042, 3, 17, 21, 49)) do
+        cache.increment("hits", expires_in: 1.minute)
+        cache.increment("hits", expires_in: 1.minute)
+        Timecop.travel(61.seconds.from_now) do
+          cache.increment("hits", expires_in: 1.minute).should eq(1_i64)
+        end
+      end
+    end
+
+    it "raises when the existing value is not an integer" do
+      cache = LuckyCache::MemoryStore.new
+      cache.write("hits") { "many" }
+      expect_raises(ArgumentError, "Cannot increment") do
+        cache.increment("hits")
+      end
+    end
+  end
+
+  describe "#decrement" do
+    it "subtracts from the existing value" do
+      cache = LuckyCache::MemoryStore.new
+      cache.increment("hits", by: 5)
+      cache.decrement("hits").should eq(4_i64)
+      cache.decrement("hits", by: 3).should eq(1_i64)
+    end
+
+    it "starts a missing key below zero" do
+      cache = LuckyCache::MemoryStore.new
+      cache.decrement("hits").should eq(-1_i64)
+    end
+  end
+
   describe "#delete" do
     it "returns nil when no item exists" do
       cache = LuckyCache::MemoryStore.new

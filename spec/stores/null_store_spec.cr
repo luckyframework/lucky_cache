@@ -125,4 +125,21 @@ describe LuckyCache::NullStore do
       cache.size.should eq(0)
     end
   end
+
+  describe "#increment" do
+    it "returns the amount without storing anything" do
+      cache = LuckyCache::NullStore.new
+      cache.increment("hits").should eq(1_i64)
+      cache.increment("hits", by: 3).should eq(3_i64)
+      cache.read("hits").should be_nil
+    end
+  end
+
+  describe "#decrement" do
+    it "returns the negated amount without storing anything" do
+      cache = LuckyCache::NullStore.new
+      cache.decrement("hits").should eq(-1_i64)
+      cache.read("hits").should be_nil
+    end
+  end
 end
