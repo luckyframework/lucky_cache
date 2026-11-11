@@ -2,21 +2,17 @@ module LuckyCache
   struct MemoryStore < BaseStore
     private getter cache : SplayTreeMap(CacheKey, CacheItem)
 
+    private getter lock : Mutex
+
     def initialize
       @cache = SplayTreeMap(CacheKey, CacheItem).new
+      @lock = Mutex.new
     end
 
     # Returns the `CacheItem` or nil if the `key` is not found.
     # If the key is found, but the item is expired, remove it and return nil.
     def read(key : CacheKey) : CacheItem?
-      if item = cache[key]?
-        if item.expired?
-          cache.delete(key)
-          nil
-        else
-          item
-        end
-      end
+      lock.synchronize { unexpired_item(key) }
     end
 
     # Adds the block value to the `cache`. Returns the block value
@@ -34,22 +30,23 @@ module LuckyCache
         stored_data = data
       end
 
-      cache[key] = CacheItem.new(
+      item = CacheItem.new(
         value: stored_data,
         expires_in: expires_in
       )
+      lock.synchronize { cache[key] = item }
 
       data
     end
 
     # Deletes `key` from the cache
     def delete(key : CacheKey)
-      cache.delete(key)
+      lock.synchronize { cache.delete(key) }
     end
 
     # Completely clears all cache keys
     def flush : Nil
-      cache.clear
+      lock.synchronize { cache.clear }
     end
 
     # If the `CacheItem` exists, it will map the `Array(Cacheable)`
@@ -82,7 +79,18 @@ module LuckyCache
 
     # The total number of items in the cache.
     def size : Int32
-      @cache.size
+      lock.synchronize { cache.size }
+    end
+
+    private def unexpired_item(key : CacheKey) : CacheItem?
+      if item = cache[key]?
+        if item.expired?
+          cache.delete(key)
+          nil
+        else
+          item
+        end
+      end
     end
   end
 end
