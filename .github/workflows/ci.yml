@@ -14,15 +14,15 @@ jobs:
     continue-on-error: false
     steps:
       - name: Download source
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Install Crystal
         uses: crystal-lang/install-crystal@v1
-      - name: Install shards
-        run: shards install
+        with:
+          crystal: latest
       - name: Format
         run: crystal tool format --check
-      - name: Lint
-        run: ./bin/ameba
+      - name: Run Ameba Linter
+        uses: crystal-ameba/github-action@v1
   specs:
     strategy:
       fail-fast: false
@@ -32,12 +32,12 @@ jobs:
           - macos-latest
           - windows-latest
         crystal_version:
-          - 1.16.3
+          - 1.18.2
           - latest
     runs-on: ${{ matrix.os }}
     continue-on-error: false
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: crystal-lang/install-crystal@v1
         with:
           crystal: ${{ matrix.crystal_version }}

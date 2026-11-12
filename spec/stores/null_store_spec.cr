@@ -82,7 +82,7 @@ describe LuckyCache::NullStore do
 
       str.should eq("test")
       int.should eq(0_i64)
-      bul.should eq(false)
+      bul.should be_false
       tym.should eq(Time.local(1999, 10, 31, 18, 30))
     end
   end
@@ -90,25 +90,25 @@ describe LuckyCache::NullStore do
   describe "#read" do
     it "always returns nil because it doesn't cache" do
       cache = LuckyCache::NullStore.new
-      cache.read("key").should eq(nil)
+      cache.read("key").should be_nil
       cache.write("key", expires_in: 1.minute) { "some data" }
-      cache.read("key").should eq(nil)
+      cache.read("key").should be_nil
     end
   end
 
   describe "#delete" do
     it "always returns nil because there's nothing to delete" do
       cache = LuckyCache::NullStore.new
-      cache.delete("key").should eq(nil)
+      cache.delete("key").should be_nil
       cache.write("key", expires_in: 1.minute) { "some data" }
-      cache.delete("key").should eq(nil)
+      cache.delete("key").should be_nil
     end
   end
 
   describe "#flush" do
     it "does nothing" do
       cache = LuckyCache::NullStore.new
-      cache.responds_to?(:flush).should eq(true)
+      cache.responds_to?(:flush).should be_true
     end
   end
 

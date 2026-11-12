@@ -168,7 +168,7 @@ describe LuckyCache::MemoryStore do
 
       str.should eq("test")
       int.should eq(0_i64)
-      bul.should eq(false)
+      bul.should be_false
       tym.should eq(Time.local(1999, 10, 31, 18, 30))
     end
 
@@ -179,13 +179,13 @@ describe LuckyCache::MemoryStore do
           UUID.random
         end
         Timecop.travel(12.hours.from_now) do
-          cache.read("coupon").as(LuckyCache::CacheItem).expired?.should eq(false)
+          cache.read("coupon").as(LuckyCache::CacheItem).expired?.should be_false
         end
         Timecop.travel(35.hours.from_now) do
-          cache.read("coupon").as(LuckyCache::CacheItem).expired?.should eq(false)
+          cache.read("coupon").as(LuckyCache::CacheItem).expired?.should be_false
         end
         Timecop.travel(49.hours.from_now) do
-          cache.read("coupon").should eq(nil)
+          cache.read("coupon").should be_nil
         end
       end
     end
@@ -194,14 +194,14 @@ describe LuckyCache::MemoryStore do
   describe "#read" do
     it "returns nil when no key is found" do
       cache = LuckyCache::MemoryStore.new
-      cache.read("key").should eq(nil)
+      cache.read("key").should be_nil
     end
 
     it "returns nil when the item is expired" do
       cache = LuckyCache::MemoryStore.new
       cache.write("key", expires_in: 1.minute) { "some data" }
       Timecop.travel(90.seconds.from_now) do
-        cache.read("key").should eq(nil)
+        cache.read("key").should be_nil
       end
     end
 
@@ -212,7 +212,7 @@ describe LuckyCache::MemoryStore do
       cache.size.should eq(2)
 
       Timecop.travel(90.seconds.from_now) do
-        cache.read("key1").should eq(nil)
+        cache.read("key1").should be_nil
         cache.size.should eq(1)
 
         cache.read("key2").should_not be_nil
@@ -291,7 +291,7 @@ describe LuckyCache::MemoryStore do
   describe "#delete" do
     it "returns nil when no item exists" do
       cache = LuckyCache::MemoryStore.new
-      cache.delete("key").should eq(nil)
+      cache.delete("key").should be_nil
     end
 
     it "deletes the value from cache" do
